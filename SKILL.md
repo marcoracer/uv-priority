@@ -38,23 +38,50 @@ NEVER use these pip commands. ALWAYS use the uv equivalent:
 |---------------|---------------|
 | `pip install <package>` | `uv add <package>` |
 | `pip install -r requirements.txt` | `uv pip install -r requirements.txt` |
-| `pip install dbt-snowflake` | `uv add dbt-snowflake` |
-| `pip install dbt-core` | `uv add dbt-core` |
 | `pip list` | `uv pip list` |
 | `pip freeze` | `uv pip freeze` |
+
+### Popular Python Tools with CLI
+
+These are commonly installed Python packages that have CLI commands. When installing or running them, always use `uv`:
+
+| Tool | Install with uv | Run with uv |
+|------|----------------|-------------|
+| **dbt** (dbt-core) | `uv add dbt-snowflake` (or dbt-postgres) | `uv run dbt <command>` |
+| **pytest** | `uv add pytest` | `uv run pytest` |
+| **black** (formatter) | `uv add black` | `uv run black` |
+| **ruff** (linter) | `uv add ruff` | `uv run ruff` |
+| **mypy** (type checker) | `uv add mypy` | `uv run mypy` |
+| **flake8** (linter) | `uv add flake8` | `uv run flake8` |
+| **pylint** (linter) | `uv add pylint` | `uv run pylint` |
+| **isort** (import sorter) | `uv add isort` | `uv run isort` |
+| **poetry** (dependency manager) | `uv add poetry` | `uv run poetry` |
+| **pipenv** (dependency manager) | `uv add pipenv` | `uv run pipenv` |
+| **cookiecutter** (project templates) | `uv add cookiecutter` | `uv run cookiecutter` |
+| **httpie** (HTTP client) | `uv add httpie` | `uv run http` |
+| **mycli** (MySQL CLI) | `uv add mycli` | `uv run mycli` |
+| **pgcli** (PostgreSQL CLI) | `uv add pgcli` | `uv run pgcli` |
+
+### Running Any Python Package CLI
+
+For ANY Python package with a CLI command:
+```bash
+# Install
+uv add <package>
+
+# Run the CLI
+uv run <cli-command>
+```
+
+### Environment and Scripts
+
+| NEVER use pip | ALWAYS use uv |
+|---------------|---------------|
 | `python -m venv .venv` | `uv venv` |
 | `python script.py` | `uv run script.py` |
-| `pytest` | `uv run pytest` |
-| `dbt run` | `uv run dbt run` |
-| `dbt debug` | `uv run dbt debug` |
-| `dbt deps` | `uv run dbt deps` |
-
-## Special Cases for dbt
-
-When installing or working with dbt:
-- Install: `uv add dbt-snowflake` (or dbt-postgres, etc.)
-- Run dbt commands: `uv run dbt <command>`
-- Check dbt version: `uv run dbt --version`
+| `python -m module` | `uv run python -m module` |
+| `python -m pip install` | `uv add` |
+| `python -m pip list` | `uv pip list` |
 
 ## Priority
 
