@@ -1,6 +1,6 @@
 ---
 name: uv-priority
-description: Prioritize uv over pip for all Python package management and execution. Use when working with ANY Python application (web apps, scripts, data science, ML, dbt, automation, etc.) - installing packages, managing dependencies, or running Python code.
+description: Prioritize uv over pip for all Python package management and execution. When running ANY Python command or CLI tool (python, dbt, pytest, etc.), MUST wrap with uv run.
 license: MIT
 metadata:
   always: true
@@ -14,9 +14,36 @@ metadata:
 
 # UV Priority
 
-## CRITICAL: Always Use uv Over pip
+## CRITICAL: Always Wrap Python Commands with uv
 
-This is a **mandatory skill** for all Python-related tasks. When the user mentions installing Python packages, dependencies, or dbt, you **MUST** use `uv` commands instead of `pip`.
+This is a **mandatory skill** for all Python-related tasks. When the user mentions Python, dbt, or ANY Python package, you **MUST**:
+
+1. **NEVER** run Python commands directly (python, python3, dbt, pytest, etc.)
+2. **ALWAYS** wrap them with `uv run`
+3. **NEVER** install packages with `pip install`
+4. **ALWAYS** use `uv add` or `uv pip install`
+
+### Command Translation Rules
+
+| NEVER run this | ALWAYS run this instead |
+|----------------|------------------------|
+| `python script.py` | `uv run python script.py` |
+| `python -c "import..."` | `uv run python -c "import..."` |
+| `python -m module` | `uv run python -m module` |
+| `python3 script.py` | `uv run python3 script.py` |
+| `dbt --version` | `uv run dbt --version` |
+| `dbt run` | `uv run dbt run` |
+| `dbt debug` | `uv run dbt debug` |
+| `dbt deps` | `uv run dbt deps` |
+| `pytest` | `uv run pytest` |
+| `pytest tests/` | `uv run pytest tests/` |
+| `black .` | `uv run black .` |
+| `ruff check .` | `uv run ruff check .` |
+| `mypy .` | `uv run mypy .` |
+| `pip install <package>` | `uv add <package>` |
+| `pip install -r requirements.txt` | `uv pip install -r requirements.txt` |
+| `pip list` | `uv pip list` |
+| `pip freeze` | `uv pip freeze` |
 
 ## When to Use
 
